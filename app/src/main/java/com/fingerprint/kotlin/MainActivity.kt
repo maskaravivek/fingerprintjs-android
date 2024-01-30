@@ -38,6 +38,7 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.coroutines.launch
 
+// Add the line below
 var fingerPrint: FingerPrint? = null
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +46,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            // Add the line below
             fingerPrint = FingerPrint(context = LocalContext.current)
+
             FingerPrintKotlinTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(

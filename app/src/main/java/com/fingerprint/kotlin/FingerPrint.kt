@@ -9,7 +9,7 @@ class FingerPrint(context: Context) {
     // Initialization
     val factory = FingerprintJSFactory(context)
     val configuration = Configuration(
-        apiKey = "tste7rSbQc9NsIliFwN8",
+        apiKey = "your-public-api-key",
         region = Configuration.Region.EU
     )
 
@@ -17,7 +17,6 @@ class FingerPrint(context: Context) {
         configuration
     )
 
-    // Initialization
     var visitorId:String? = null
     init {
         getVisitorId()
