@@ -42,7 +42,7 @@ class Network {
 }
 
 object RetrofitInstance {
-    private const val LOCAL_BASE_URL = "http://192.168.88.247:8080/user/"
+    private const val LOCAL_BASE_URL = "http://your-ip-address:8080/user/"
 
     val localRetrofit: Retrofit = Retrofit.Builder()
         .baseUrl(LOCAL_BASE_URL)
