@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -36,9 +36,8 @@ fun HeadingTextComponent(heading: String) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTextField(labelVal: String, icon: ImageVector) {
+fun MyTextField(labelVal: String, icon: ImageVector, onValueChange: (String) -> Unit) {
     var textVal by remember {
         mutableStateOf("")
     }
@@ -52,6 +51,7 @@ fun MyTextField(labelVal: String, icon: ImageVector) {
         value = textVal,
         onValueChange = {
             textVal = it
+            onValueChange(it)
         },
         modifier = Modifier.fillMaxWidth(),
         colors = TextFieldDefaults.colors(
@@ -77,9 +77,9 @@ fun MyTextField(labelVal: String, icon: ImageVector) {
 }
 
 @Composable
-fun MyButton(labelVal: String, onPressed:()->Unit) {
+fun MyButton(labelVal: String, loading: Boolean = false, onPressed: () -> Unit) {
     Button(
-        onClick = onPressed,
+        onClick = { onPressed() },
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary
         ),
@@ -87,7 +87,9 @@ fun MyButton(labelVal: String, onPressed:()->Unit) {
             .fillMaxWidth()
             .padding(top = 40.dp)
     ) {
-        Text(
+        if (loading) CircularProgressIndicator(
+            color = Color.White
+        ) else Text(
             text = labelVal,
             color = Color.White,
             fontSize = 18.sp,
