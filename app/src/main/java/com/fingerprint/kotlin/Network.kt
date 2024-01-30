@@ -10,20 +10,29 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 class Network {
-    suspend fun loginUser(email:String,password:String):JsonElement?{
+    suspend fun loginUser(email: String, password: String, visitorId: String?): JsonElement? {
         return try {
-            ApiClient.localApiService.loginUser(email,password,
-                fingerPrint?.visitorId)
+            ApiClient.localApiService.loginUser(
+                email, password,
+                visitorId
+            )
         } catch (e: Exception) {
             e.localizedMessage?.let { Log.e("", it) }
             null
         }
     }
 
-    suspend fun signUpUser(email:String,password:String,name:String):JsonElement?{
+    suspend fun signUpUser(
+        email: String,
+        password: String,
+        name: String,
+        visitorId: String?,
+    ): JsonElement? {
         return try {
-            ApiClient.localApiService.signUpUser(email,password,name,
-                fingerPrint?.visitorId)
+            ApiClient.localApiService.signUpUser(
+                email, password, name,
+                visitorId
+            )
         } catch (e: Exception) {
             e.localizedMessage?.let { Log.e("", it) }
             null
@@ -44,16 +53,20 @@ object RetrofitInstance {
 interface ApiService {
     @FormUrlEncoded
     @POST("login")
-    suspend fun loginUser(@Field("email") email: String,
-                  @Field("password") password: String,
-                          @Field("visitorId") visitorId: String?,): JsonElement
+    suspend fun loginUser(
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("visitorId") visitorId: String?,
+    ): JsonElement
 
     @FormUrlEncoded
     @POST("sign-up")
-    suspend fun signUpUser(@Field("email") email: String,
-                   @Field("password") password: String,
-                   @Field("name") name: String,
-                           @Field("visitorId") visitorId: String?,): JsonElement
+    suspend fun signUpUser(
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("name") name: String,
+        @Field("visitorId") visitorId: String?,
+    ): JsonElement
 }
 
 object ApiClient {
