@@ -17,14 +17,17 @@ class FingerPrint(context: Context) {
         configuration
     )
 
-    var visitorId:String? = null
+    var visitorId: String? = null
+    var requestId: String? = null
     init {
         getVisitorId()
     }
+
     private fun getVisitorId() {
         fpjsClient.getVisitorId { result ->
-            Log.d("--FINGERPRINT--",result.toString())
-             visitorId = result.visitorId
+            Log.d("--FINGERPRINT--", result.toString())
+            visitorId = result.visitorId
+            requestId = result.requestId
         }
     }
 }

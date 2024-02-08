@@ -100,7 +100,11 @@ fun Navigation() {
                     Spacer(modifier = Modifier.height(10.dp))
                     HeadingTextComponent(heading = "Welcome ${user?.get("name")}")
                     Text(
-                        text = "Your email address is: ${user?.get("email")}.\nYour Visitor ID is: ${user?.get("visitorId")}"
+                        text = "Your email address is: ${user?.get("email")}.\nYour Visitor ID is: ${
+                            user?.get(
+                                "visitorId"
+                            )
+                        }"
                     )
                 }
             }
@@ -142,13 +146,16 @@ fun LoginScreen(navController: NavHostController) {
                     })
                 Spacer(modifier = Modifier.height(15.dp))
             }
-             MyButton(
+            MyButton(
                 labelVal = "Login",
-                 loading=loading,
+                loading = loading,
                 onPressed = {
                     loading = true
                     coroutineScope.launch {
-                        val res = Network().loginUser(email, password, fingerPrint?.visitorId)
+                        val res = Network().loginUser(
+                            email, password, fingerPrint?.visitorId,
+                            fingerPrint?.requestId
+                        )
                         loading = false
                         if (res != null) {
                             Log.d("", res.toString())
@@ -212,11 +219,17 @@ fun SignupScreen(navController: NavHostController) {
             }
             MyButton(
                 labelVal = "Continue",
-                loading=loading,
+                loading = loading,
                 onPressed = {
                     loading = true
                     coroutineScope.launch {
-                        val res = Network().signUpUser(email, password, name, fingerPrint?.visitorId)
+                        val res = Network().signUpUser(
+                            email,
+                            password,
+                            name,
+                            fingerPrint?.visitorId,
+                            fingerPrint?.requestId
+                        )
                         loading = false
                         if (res != null) {
                             Log.d("", res.toString())
