@@ -142,7 +142,7 @@ fun LoginScreen(navController: NavHostController) {
                 onPressed = {
                     loading = true
                     coroutineScope.launch {
-                        val res = Network().loginUser(email, password, fingerPrint?.visitorId)
+                        val res = Network().loginUser(email, password, fingerPrint?.visitorId,fingerPrint?.requestId)
                         loading = false
                         if (res != null) {
                             Log.d("", res.toString())
@@ -210,7 +210,7 @@ fun SignupScreen(navController: NavHostController) {
                 onPressed = {
                     loading = true
                     coroutineScope.launch {
-                        val res = Network().signUpUser(email, password, name, fingerPrint?.visitorId)
+                        val res = Network().signUpUser(email, password, name, fingerPrint?.visitorId,fingerPrint?.requestId)
                         loading = false
                         if (res != null) {
                             Log.d("", res.toString())
