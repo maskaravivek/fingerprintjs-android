@@ -10,11 +10,16 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 class Network {
-    suspend fun loginUser(email: String, password: String, visitorId: String?): JsonElement? {
+    suspend fun loginUser(
+        email: String,
+        password: String,
+        visitorId: String?,
+        requestId: String?
+    ): JsonElement? {
         return try {
             ApiClient.localApiService.loginUser(
                 email, password,
-                visitorId
+                visitorId, requestId
             )
         } catch (e: Exception) {
             e.localizedMessage?.let { Log.e("", it) }
@@ -27,11 +32,12 @@ class Network {
         password: String,
         name: String,
         visitorId: String?,
+        requestId: String?
     ): JsonElement? {
         return try {
             ApiClient.localApiService.signUpUser(
                 email, password, name,
-                visitorId
+                visitorId, requestId
             )
         } catch (e: Exception) {
             e.localizedMessage?.let { Log.e("", it) }
@@ -57,6 +63,7 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String,
         @Field("visitorId") visitorId: String?,
+        @Field("requestId") requestId: String?,
     ): JsonElement
 
     @FormUrlEncoded
@@ -66,6 +73,7 @@ interface ApiService {
         @Field("password") password: String,
         @Field("name") name: String,
         @Field("visitorId") visitorId: String?,
+        @Field("requestId") requestId: String?,
     ): JsonElement
 }
 
@@ -74,4 +82,3 @@ object ApiClient {
         RetrofitInstance.localRetrofit.create(ApiService::class.java)
     }
 }
-
