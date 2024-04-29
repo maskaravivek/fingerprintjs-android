@@ -10,7 +10,7 @@ class FingerPrint(context: Context) {
     val factory = FingerprintJSFactory(context)
     val configuration = Configuration(
         apiKey = "your-public-api-key",
-        region = Configuration.Region.EU
+        region = Configuration.Region.US
     )
 
     val fpjsClient = factory.createInstance(

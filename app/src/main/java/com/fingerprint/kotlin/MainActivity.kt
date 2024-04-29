@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             // Add the line below
-            fingerPrint = FingerPrint(context = LocalContext.current)
+            fingerPrint = FingerPrint(context = applicationContext)
 
             FingerPrintKotlinTheme {
                 // A surface container using the 'background' color from the theme

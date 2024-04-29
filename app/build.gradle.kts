@@ -72,5 +72,5 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.fingerprint.android:pro:2.3.1")
+    implementation ("com.fingerprint.android:pro:2.4.0")
 }
